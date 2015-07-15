@@ -1,0 +1,115 @@
+-------------------------------------------------------------------------------
+Test set: com.tngtech.configbuilder.ConfigBuilderIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.531 sec <<< FAILURE!
+testWithImportedConfig[0](com.tngtech.configbuilder.ConfigBuilderIntegrationTest)  Time elapsed: 0.381 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: 
+Expected: TestConfig<someNumber=5, shouldBeZero=0, someString="Hello, World!", aBoolean=true, stringCollection=["collection", "two"], pathCollection=[UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>, UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>], copiedStringCollection=["/mnt", "/home"], integerList=[1, 2, 3, 4, 5], testConfigList=null, homeDir=UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105], stringValue=null, hash=0, offsets=null>, systemProperty="de">
+  Actual: TestConfig<someNumber=5, shouldBeZero=0, someString="Hello, World!", aBoolean=true, stringCollection=["collection", "two"], pathCollection=[UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>, UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>], copiedStringCollection=["/mnt", "/home"], integerList=[1, 2, 3, 4, 5], testConfigList=null, homeDir=UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105], stringValue=null, hash=0, offsets=null>, systemProperty="de">
+
+--- Found following differences ---
+pathCollection[0].path[1]: expected: 104, actual: 109
+pathCollection[0].path[2]: expected: 111, actual: 110
+pathCollection[0].path[3]: expected: 109, actual: 116
+pathCollection[0].path[4]: expected: 101, actual: --no match--
+pathCollection[0].hash: expected: 46613902, actual: 1508452
+pathCollection[1].path[1]: expected: 109, actual: 104
+pathCollection[1].path[2]: expected: 110, actual: 111
+pathCollection[1].path[3]: expected: 116, actual: 109
+pathCollection[1].path[4]: expected: --no match--, actual: 101
+pathCollection[1].hash: expected: 1508452, actual: 46613902
+
+--- Difference detail tree ---
+ expected: TestConfig<someNumber=5, shouldBeZero=0, someString="Hello, World!", aBoolean=true, stringCollection=["collection", "two"], pathCollection=[UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>, UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>], copiedStringCollection=["/mnt", "/home"], integerList=[1, 2, 3, 4, 5], testConfigList=null, homeDir=UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105], stringValue=null, hash=0, offsets=null>, systemProperty="de">
+   actual: TestConfig<someNumber=5, shouldBeZero=0, someString="Hello, World!", aBoolean=true, stringCollection=["collection", "two"], pathCollection=[UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>, UnixPath<, fs=MacOSXFileSystem<...>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>], copiedStringCollection=["/mnt", "/home"], integerList=[1, 2, 3, 4, 5], testConfigList=null, homeDir=UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105], stringValue=null, hash=0, offsets=null>, systemProperty="de">
+
+pathCollection expected: [UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>, UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>]
+pathCollection   actual: [UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>, UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>provider=MacOSXFileSystemProvider<...>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<...>>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>]
+
+pathCollection[0] expected: UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>
+pathCollection[0]   actual: UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>
+
+pathCollection[0].path expected: [47, 104, 111, 109, 101]
+pathCollection[0].path   actual: [47, 109, 110, 116]
+
+pathCollection[0].path[1] expected: 104
+pathCollection[0].path[1]   actual: 109
+
+pathCollection[0].path[2] expected: 111
+pathCollection[0].path[2]   actual: 110
+
+pathCollection[0].path[3] expected: 109
+pathCollection[0].path[3]   actual: 116
+
+pathCollection[0].path[4] expected: 101
+pathCollection[0].path[4]   actual: ""
+
+pathCollection[0].hash expected: 46613902
+pathCollection[0].hash   actual: 1508452
+
+pathCollection[1] expected: UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>>, path=[47, 109, 110, 116], stringValue=null, hash=1508452, offsets=null>
+pathCollection[1]   actual: UnixPath<, fs=MacOSXFileSystem<provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>provider=MacOSXFileSystemProvider<, theFileSystem=MacOSXFileSystem<...>, theFileSystem=MacOSXFileSystem<...>>, defaultDirectory=[47, 85, 115, 101, 114, 115, 47, 97, 110, 100, 105, 47, 112, 114, 111, ...], needToResolveAgainstDefaultDirectory=false, rootDirectory=UnixPath<, fs=MacOSXFileSystem<...>, path=[47], stringValue=null, hash=0, offsets=null>>, path=[47, 104, 111, 109, 101], stringValue=null, hash=46613902, offsets=null>
+
+pathCollection[1].path expected: [47, 109, 110, 116]
+pathCollection[1].path   actual: [47, 104, 111, 109, 101]
+
+pathCollection[1].path[1] expected: 109
+pathCollection[1].path[1]   actual: 104
+
+pathCollection[1].path[2] expected: 110
+pathCollection[1].path[2]   actual: 111
+
+pathCollection[1].path[3] expected: 116
+pathCollection[1].path[3]   actual: 109
+
+pathCollection[1].path[4] expected: ""
+pathCollection[1].path[4]   actual: 101
+
+pathCollection[1].hash expected: 1508452
+pathCollection[1].hash   actual: 46613902
+
+
+	at junit.framework.Assert.fail(Assert.java:57)
+	at org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals(ReflectionAssert.java:136)
+	at org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals(ReflectionAssert.java:99)
+	at com.tngtech.configbuilder.ConfigBuilderIntegrationTest.testWithImportedConfig(ConfigBuilderIntegrationTest.java:108)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.junit.runners.Suite.runChild(Suite.java:127)
+	at org.junit.runners.Suite.runChild(Suite.java:26)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
