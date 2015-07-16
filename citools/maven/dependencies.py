@@ -20,16 +20,18 @@
 
 from __future__ import print_function
 
-from subprocess import check_output
+from subprocess import Popen, PIPE
 import re
 
 from .data import Dependency
+
 
 class DependencyList(object):
     regexp = re.compile(r'([\w\.-]*):([\w\.-]*):(\w*):([\w\.-]*):(\w*)')
 
     def get_dependencies(self, project_name):
-        dependencies_output = check_output(['mvn', 'dependencies:list', '-pl', project_name])
+        pipe = Popen(['mvn', 'dependencies:list', '-pl', project_name], stdout=PIPE)
+        (dependencies_output, _) = pipe.communicate()
 
         return self.parse_dependencies(dependencies_output)
 

@@ -36,8 +36,8 @@ class Report(object):
 
         kwargs = test_suite.attrib
         kwargs['testcases'] = [self.create_testcase(testcase) for testcase in test_suite.findall('testcase')]
-        kwargs['properties'] = {property.attrib['name']: property.attrib['value'] for property in
-                                test_suite.find('properties').getchildren()}
+        kwargs['properties'] = dict((property.attrib['name'], property.attrib['value']) for property in
+                                test_suite.find('properties').getchildren())
 
         return TestSuite(**kwargs)
 
