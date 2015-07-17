@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='citools',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages(),
     scripts=glob.glob('scripts/*'),
     description='CI Tools',
@@ -31,6 +31,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
-    requires=['requests'],
+    install_requires=['requests'],
     tests_require=['nose', 'mock', 'coverage', 'assertpy'],
 )
