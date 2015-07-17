@@ -10,7 +10,6 @@ class Report(object):
     API_JSON = "/api/json"
 
     def get_report(self, job_url, build_number=None):
-        print job_url + self.API_JSON
         project_info = json.loads(requests.get(job_url + self.API_JSON).text)
 
         if build_number is None:
@@ -25,8 +24,6 @@ class Report(object):
             raise ValueError("no build with number {} found".format(build_number))
 
         build_info = json.loads(requests.get(build_url + self.API_JSON).text)
-
-        print build_url + '/testReport' + self.API_JSON
 
         test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
 
