@@ -49,8 +49,8 @@ class TestReport(object):
         return self.errors == 0 and self.failures == 0 and self.passed > 0
 
     def __repr__(self):
-        return "TestReport(total=" + self.total + ", skipped=" + self.skipped + ", failures=" + self.failures + \
-               ", errors=" + self.errors + ")"
+        return "TestReport(total=" + str(self.total) + ", skipped=" + str(self.skipped) + ", failures=" \
+               + str(self.failures) + ", errors=" + str(self.errors) + ")"
 
 
 class TestSuite(object):
