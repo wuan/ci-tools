@@ -48,6 +48,10 @@ class TestReport(object):
     def is_successful(self):
         return self.errors == 0 and self.failures == 0 and self.passed > 0
 
+    def __repr__(self):
+        return "TestReport(total=" + self.total + ", skipped=" + self.skipped + ", failures=" + self.failures + \
+               ", errors=" + self.errors + ")"
+
 
 class TestSuite(object):
     def __init__(self, name, passed, skipped, failures, errors, duration, testcases, properties=None):
