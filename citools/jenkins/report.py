@@ -72,6 +72,7 @@ class Report(object):
             if value is not None and new_key is not None:
                 target[new_key] = value
             elif new_key is None:
+                print(old_key, value)
                 print("dropped {}: {}".format(old_key, value))
 
         return target
