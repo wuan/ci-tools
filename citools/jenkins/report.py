@@ -28,7 +28,12 @@ class Report(object):
 
         print build_url + '/testReport' + self.API_JSON
 
-        test_report = json.loads(requests.get(build_url + '/testReport' + self.API_JSON).text)
+        test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
+
+        if test_report_request.status_code != 200:
+            return None
+
+        test_report = json.loads(test_report_request.text)
 
         suites_by_module = {}
 
