@@ -1,11 +1,13 @@
 # coding=utf-8
+import glob
 
 from setuptools import setup, find_packages
 
 setup(
     name='citools',
-    version='0.1.1',
+    version='0.1.2',
     packages=find_packages(),
+    scripts=glob.glob('scripts/*'),
     description='CI Tools',
     author='Andreas Würl',
     author_email='andreas@wuerl.net',
