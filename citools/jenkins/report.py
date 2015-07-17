@@ -71,8 +71,6 @@ class Report(object):
             value = target.pop(old_key)
             if value is not None and new_key is not None:
                 target[new_key] = value
-            elif new_key is None:
-                print("dropped", old_key, ":", value)
 
         return target
 
