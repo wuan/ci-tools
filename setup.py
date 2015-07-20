@@ -1,21 +1,14 @@
 # coding=utf-8
 import glob
-try:
-    from pypandoc import convert
-    read_md = lambda f: convert(f, 'rst')
-except ImportError:
-    print("warning: pypandoc module not found, could not convert Markdown to RST")
-    read_md = lambda f: open(f, 'r').read()
 
 from setuptools import setup, find_packages
 
 setup(
     name='citools',
-    version='0.2.12',
+    version='0.2.14',
     packages=find_packages(),
     scripts=glob.glob('scripts/*'),
     description='CI Tools',
-    long_description=read_md('README.md'),
     author='Andreas Würl',
     author_email='andreas@wuerl.net',
     license='Apache-2.0',
