@@ -1,9 +1,7 @@
 import json
-import os
-import pprint
-import urlparse
+from junit_xml import TestCase, TestSuite
 import requests
-from ..data import TestSuite, TestCase, TestReport
+from ..data import TestReport
 
 
 class Report(object):
@@ -58,22 +56,25 @@ class Report(object):
         return TestReport(build_info['displayName'], suites_by_module,
                           build_number, is_incremental)
 
-    def create_suite(self, suite_properties, timestamp):
-        suite_properties = self.map_keys(suite_properties, self.SUITE_MAP)
+    def create_suite(self, props, timestamp):
+        props = self.map_keys(props, self.SUITE_MAP)
 
-        testcases = [self.create_case(case) for case in suite_properties['testcases']]
-        suite_properties['testcases'] = testcases
-        suite_properties['passed'] = len([testcase for testcase in testcases if testcase.status == 'PASSED'])
-        suite_properties['skipped'] = len([testcase for testcase in testcases if testcase.status == 'SKIPPED'])
-        suite_properties['failures'] = len([testcase for testcase in testcases if testcase.status == 'FAILED'])
-        suite_properties['errors'] = len([testcase for testcase in testcases if testcase.status == 'ERROR'])
-        suite_properties['timestamp'] = timestamp
+        test_cases = [self.create_case(case) for case in props['testcases']]
 
-        return TestSuite(**suite_properties)
+        return TestSuite(props['name'], test_cases=test_cases, id=props['id'], timestamp=timestamp)
 
-    def create_case(self, case_properties):
-        case_properties = self.map_keys(case_properties, self.CASE_MAP)
-        return TestCase(**case_properties)
+    def create_case(self, props):
+        test_case = TestCase(classname=props['className'], elapsed_sec=props['duration'], name=props['name'])
+
+        status = props['status']
+        if status == 'SKIPPED':
+            test_case.add_skipped_info(status)
+        elif status == 'FAILED':
+            test_case.add_failure_info(status)
+        elif status == 'ERROR':
+            test_case.add_error_info(status)
+
+        return test_case
 
     def map_keys(self, target, key_map):
         for old_key, new_key in key_map.iteritems():

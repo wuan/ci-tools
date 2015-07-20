@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='citools',
-    version='0.1.58',
+    version='0.2.0',
     packages=find_packages(),
     scripts=glob.glob('scripts/*'),
     description='CI Tools',
@@ -32,6 +32,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
-    install_requires=['requests'],
+    install_requires=['requests', 'junit-xml'],
     tests_require=['nose', 'mock', 'coverage', 'assertpy'],
 )
