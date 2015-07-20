@@ -1,5 +1,6 @@
 import json
 import os
+import pprint
 import urlparse
 import requests
 from ..data import TestSuite, TestCase, TestReport
@@ -27,6 +28,10 @@ class Report(object):
 
         build_info = json.loads(requests.get(build_url + self.API_JSON).text)
 
+        timestamp = build_info['timestamp'] / 1000
+
+        print("timestamp", timestamp)
+
         test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
 
         if test_report_request.status_code != 200:
@@ -41,12 +46,13 @@ class Report(object):
             module_url = child_report['child']['url']
             module = module_url[len(job_url):].split('/')[1].replace('$', ':')
 
-            suites = [self.create_suite(suite) for suite in child_result['suites']]
+            suites = [self.create_suite(suite, timestamp) for suite in child_result['suites']]
             suites_by_module[module] = suites
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"
                                or cause['shortDescription'].startswith("commit notification ")])
+
 
         print("causes: " + ", ".join(
             [str(cause) for cause in self.get_causes(build_info['actions'])]))
@@ -54,7 +60,7 @@ class Report(object):
         return TestReport(build_info['displayName'], suites_by_module,
                           build_number, is_incremental)
 
-    def create_suite(self, suite_properties):
+    def create_suite(self, suite_properties, timestamp):
         suite_properties = self.map_keys(suite_properties, self.SUITE_MAP)
 
         testcases = [self.create_case(case) for case in suite_properties['testcases']]
@@ -63,6 +69,7 @@ class Report(object):
         suite_properties['skipped'] = len([testcase for testcase in testcases if testcase.status == 'SKIPPED'])
         suite_properties['failures'] = len([testcase for testcase in testcases if testcase.status == 'FAILED'])
         suite_properties['errors'] = len([testcase for testcase in testcases if testcase.status == 'ERROR'])
+        suite_properties['timestamp'] = timestamp
 
         return TestSuite(**suite_properties)
 

@@ -17,6 +17,7 @@
    limitations under the License.
 
 """
+import datetime
 
 
 class TestReport(object):
@@ -50,11 +51,12 @@ class TestReport(object):
 
     def __repr__(self):
         return "TestReport(total=" + str(self.total) + ", skipped=" + str(self.skipped) + ", failures=" \
-               + str(self.failures) + ", errors=" + str(self.errors) + ", #suites=" + str(len(self.suites_by_module)) + ")"
+               + str(self.failures) + ", errors=" + str(self.errors) + ", #suites=" + str(
+            len(self.suites_by_module)) + ")"
 
 
 class TestSuite(object):
-    def __init__(self, name, passed, skipped, failures, errors, duration, testcases, properties=None):
+    def __init__(self, name, passed, skipped, failures, errors, duration, testcases, timestamp, properties=None):
         self.name = name
         self.passed = int(passed)
         self.skipped = int(skipped)
@@ -62,6 +64,7 @@ class TestSuite(object):
         self.errors = int(errors)
         self.duration = float(duration)
         self.testcases = testcases
+        self.timestamp = timestamp
         self.properties = properties
 
     @property
@@ -69,7 +72,8 @@ class TestSuite(object):
         return self.passed + self.skipped + self.failures + self.errors
 
     def __repr__(self):
-        return "TestSuite(name=" + str(self.name) + ", total=" + str(self.total) + ", skipped=" \
+        return "TestSuite(name=" + str(self.name) + ", timestamp=" \
+               + str(datetime.datetime.fromtimestamp(self.timestamp)) + ", total=" + str(self.total) + ", skipped=" \
                + str(self.skipped) + ", failures=" + str(self.failures) + ", errors=" + str(self.errors) + ")"
 
 
