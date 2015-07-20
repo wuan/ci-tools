@@ -30,8 +30,6 @@ if __name__ == '__main__':
 
         previous_report = db.get('report', None)
 
-        print("previous: " + str(previous_report))
-
         if test_report.is_incremental and previous_report is not None:
             print("incremental update of " + str(previous_report))
 
