@@ -18,39 +18,57 @@
 
 """
 
+import collections
+
 
 class TestReport(object):
     def __init__(self, name, suites_by_module, build_number, is_incremental):
         self.name = name
 
-        self.passed = 0
-        self.failures = 0
-        self.skipped = 0
-        self.errors = 0
-        self.duration = 0.0
-
-        for suites in suites_by_module.values():
-            self.passed = reduce(lambda value, current_suite: current_suite.passed + value, suites, self.passed)
-            self.skipped = reduce(lambda value, current_suite: current_suite.skipped + value, suites, self.skipped)
-            self.failures = reduce(lambda value, current_suite: current_suite.failures + value, suites, self.failures)
-            self.errors = reduce(lambda value, current_suite: current_suite.errors + value, suites, self.errors)
-            self.duration = reduce(lambda value, current_suite: current_suite.duration + value, suites, self.duration)
-
         self.suites_by_module = suites_by_module
         self.build_number = build_number
         self.is_incremental = is_incremental
 
+    def accumulate_results(self):
+        results = collections.defaultdict(int)
+        for suites in self.suites_by_module.values():
+            for suite in suites:
+                self.test_suite_result(suite, results)
+        return results
+
+    def test_suite_result(self, test_suite, result):
+        for test_case in test_suite.test_cases:
+            result[self.test_case_result(test_case)] += 1
+
+    def test_case_result(self, test_case):
+        if test_case.is_skipped():
+            return "SKIPPED"
+        elif test_case.is_failure():
+            return "FAILED"
+        elif test_case.is_error():
+            return "ERROR"
+        else:
+            return "PASSED"
+
+    @property
+    def test_suites(self):
+        for suites in self.suites_by_module.values():
+            for suite in suites:
+                yield suite
+
     @property
     def total(self):
-        return self.passed + self.skipped + self.failures + self.errors
+        return sum(self.accumulate_results().values())
 
     @property
     def is_successful(self):
-        return self.errors == 0 and self.failures == 0 and self.passed > 0
+        results = self.accumulate_results()
+        return results['ERROR'] == 0 and results['FAILED'] == 0 and results['PASSED'] > 0
 
     def __repr__(self):
-        return "TestReport(total=" + str(self.total) + ", skipped=" + str(self.skipped) + ", failures=" \
-               + str(self.failures) + ", errors=" + str(self.errors) + ", #suites=" + str(
+        results = self.accumulate_results()
+        return "TestReport(total=" + str(self.total) + ", skipped=" + str(results['SKIPPED']) + ", failures=" \
+               + str(results['FAILED']) + ", errors=" + str(results['ERROR']) + ", #suites=" + str(
             len(self.suites_by_module)) + ")"
 
 

@@ -42,13 +42,12 @@ class Report(object):
             module_url = child_report['child']['url']
             module = module_url[len(job_url):].split('/')[1].replace('$', ':')
 
-            suites = [self.create_suite(suite, timestamp) for suite in child_result['suites']]
+            suites = [self.create_suite(suite, timestamp, module) for suite in child_result['suites']]
             suites_by_module[module] = suites
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"
                                or cause['shortDescription'].startswith("commit notification ")])
-
 
         print("causes: " + ", ".join(
             [str(cause) for cause in self.get_causes(build_info['actions'])]))
@@ -56,15 +55,20 @@ class Report(object):
         return TestReport(build_info['displayName'], suites_by_module,
                           build_number, is_incremental)
 
-    def create_suite(self, props, timestamp):
+    def create_suite(self, props, timestamp, module):
         props = self.map_keys(props, self.SUITE_MAP)
 
         test_cases = [self.create_case(case) for case in props['testcases']]
+        test_cases = [test_case for test_case in test_cases if test_case is not None]
 
-        return TestSuite(props['name'], test_cases=test_cases, id=props['id'], timestamp=timestamp)
+        return TestSuite(props['name'].decode('ascii', 'ignore'), test_cases=test_cases, timestamp=timestamp, package=module)
 
     def create_case(self, props):
-        test_case = TestCase(classname=props['className'], elapsed_sec=props['duration'], name=props['name'])
+        print("TestCase", props['className'], props['name'])
+        try:
+            test_case = TestCase(classname=props['className'].decode('ascii'), elapsed_sec=props['duration'], name=props['name'].decode('ascii', 'ignore'))
+        except UnicodeEncodeError:
+            return None
 
         status = props['status']
         if status == 'SKIPPED':
