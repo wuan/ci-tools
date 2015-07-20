@@ -41,26 +41,26 @@ if __name__ == '__main__':
     if jenkins_url is None:
         raise RuntimeError("Jenkins Url should be set.")
 
-    job_name = args[0]
-    job_url = jenkins_url + "job/" + job_name
-    test_report = report.get_report(job_url)
+    for job_name in args:
+        job_url = jenkins_url + "job/" + job_name
+        test_report = report.get_report(job_url)
 
-    if test_report is not None:
-        db = shelve.open(job_name + ".db")
+        if test_report is not None:
+            db = shelve.open(job_name + ".db")
 
-        previous_report = db.get('report', None)
+            previous_report = db.get('report', None)
 
-        if test_report.is_incremental and previous_report is not None:
-            print("incremental update of " + str(previous_report))
+            if test_report.is_incremental and previous_report is not None:
+                print("incremental update of " + str(previous_report))
 
-            suites_by_module = previous_report.suites_by_module
+                suites_by_module = previous_report.suites_by_module
 
-            suites_by_module.update(test_report.suites_by_module)
+                suites_by_module.update(test_report.suites_by_module)
 
-            test_report = TestReport(test_report.name, suites_by_module, test_report.build_number, False)
+                test_report = TestReport(test_report.name, suites_by_module, test_report.build_number, False)
 
-        db['report'] = test_report
+            db['report'] = test_report
 
-        print(job_name + ": " + str(test_report))
+            print(job_name + ": " + str(test_report))
 
-        db.close()
+            db.close()
