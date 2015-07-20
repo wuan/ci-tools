@@ -50,7 +50,7 @@ class TestReport(object):
 
     def __repr__(self):
         return "TestReport(total=" + str(self.total) + ", skipped=" + str(self.skipped) + ", failures=" \
-               + str(self.failures) + ", errors=" + str(self.errors) + ")"
+               + str(self.failures) + ", errors=" + str(self.errors) + ", #suites=" + str(len(self.suites_by_module)) + ")"
 
 
 class TestSuite(object):

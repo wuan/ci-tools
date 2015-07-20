@@ -45,7 +45,8 @@ class Report(object):
             suites_by_module[module] = suites
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
-                               if cause['shortDescription'] == "Started by an SCM change"])
+                               if cause['shortDescription'] == "Started by an SCM change"
+                               or cause['shortDescription'].starts_with("commit notification ")])
 
         print("causes: " + ", ".join(
             [str(cause) for cause in self.get_causes(build_info['actions'])]))
