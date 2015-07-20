@@ -83,7 +83,6 @@ class Report(object):
         return TestSuite(props['name'].decode('ascii', 'ignore'), test_cases=test_cases, timestamp=timestamp, package=module)
 
     def create_case(self, props):
-        print("TestCase", props['className'], props['name'])
         try:
             test_case = TestCase(classname=props['className'].decode('ascii'), elapsed_sec=props['duration'], name=props['name'].decode('ascii', 'ignore'))
         except UnicodeEncodeError:
