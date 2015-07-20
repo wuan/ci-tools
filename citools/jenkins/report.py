@@ -1,4 +1,6 @@
 import json
+import os
+import urlparse
 import requests
 from ..data import TestSuite, TestCase, TestReport
 
@@ -38,14 +40,18 @@ class Report(object):
             child_result = child_report['result']
             module_url = child_report['child']['url']
             module = module_url[len(job_url):].split('/')[1].replace('$', ':')
+
             suites = [self.create_suite(suite) for suite in child_result['suites']]
-            print(module + "with " + str(len(suites)) + " suites")
+            print(module_url)
+            print(job_url)
+            print(module + " with " + str(len(suites)) + " suites")
             suites_by_module[module] = suites
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"])
 
-        print("causes: " + ", ".join(self.get_causes(build_info['actions'])))
+        print("causes: " + ", ".join(
+            [cause['shortDescription'] for cause in self.get_causes(build_info['actions'])]))
 
         return TestReport(build_info['displayName'], suites_by_module,
                           build_number, is_incremental)
@@ -81,6 +87,3 @@ class Report(object):
             if 'causes' in action:
                 return action['causes']
         return []
-
-
-

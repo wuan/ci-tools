@@ -68,6 +68,10 @@ class TestSuite(object):
     def total(self):
         return self.passed + self.skipped + self.failures + self.errors
 
+    def __repr__(self):
+        return "TestSuite(name=" + str(self.name) + ", total=" + str(self.total) + ", skipped=" \
+               + str(self.skipped) + ", failures=" + str(self.failures) + ", errors=" + str(self.errors) + ")"
+
 
 class TestCase(object):
     def __init__(self, classname, name, duration, status):

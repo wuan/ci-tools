@@ -22,7 +22,7 @@ if __name__ == '__main__':
         raise RuntimeError("Jenkins Url should be set.")
 
     job_name = args[0]
-    job_url = jenkins_url + "/job/" + job_name
+    job_url = jenkins_url + "job/" + job_name
     test_report = report.get_report(job_url)
 
     if test_report is not None:
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
         previous_report = db.get('report', None)
 
-        print("previous report: " + str(previous_report))
+        print("previous: " + str(previous_report))
 
         if test_report.is_incremental and previous_report is not None:
             print("incremental update of " + str(previous_report))
