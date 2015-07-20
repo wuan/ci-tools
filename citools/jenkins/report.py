@@ -39,10 +39,13 @@ class Report(object):
             module_url = child_report['child']['url']
             module = module_url[len(job_url):].split('/')[1].replace('$', ':')
             suites = [self.create_suite(suite) for suite in child_result['suites']]
+            print(module + "with " + str(len(suites)) + " suites")
             suites_by_module[module] = suites
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"])
+
+        print("causes: " + ", ".join(self.get_causes(build_info['actions'])))
 
         return TestReport(build_info['displayName'], suites_by_module,
                           build_number, is_incremental)
@@ -57,7 +60,9 @@ class Report(object):
         suite_properties['failures'] = len([testcase for testcase in testcases if testcase.status == 'FAILED'])
         suite_properties['errors'] = len([testcase for testcase in testcases if testcase.status == 'ERROR'])
 
-        return TestSuite(**suite_properties)
+        suite = TestSuite(**suite_properties)
+        print("  " + str(suite))
+        return suite
 
     def create_case(self, case_properties):
         case_properties = self.map_keys(case_properties, self.CASE_MAP)
