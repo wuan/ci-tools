@@ -77,4 +77,7 @@ if __name__ == '__main__':
     print("target " + target + " " + str(target_report))
     print("source jobs:")
     for source_job in source_jobs:
-        print("  " + source_job['name'] + " #" + str(source_job['build_number']))
+        job_name = source_job['name']
+        build_number = str(source_job['build_number'])
+        print("  " + job_name + " #" + build_number + " "
+              + jenkins_url + "job/" + job_name + "/" + build_number)
