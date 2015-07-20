@@ -28,9 +28,7 @@ class Report(object):
 
         build_info = json.loads(requests.get(build_url + self.API_JSON).text)
 
-        timestamp = build_info['timestamp'] / 1000
-
-        print("timestamp", timestamp)
+        timestamp = build_info['timestamp']
 
         test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
 

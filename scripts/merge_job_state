@@ -75,6 +75,6 @@ if __name__ == '__main__':
     db.close()
 
     print("target " + target + " " + str(target_report))
-    print("source jobs")
+    print("source jobs:")
     for source_job in source_jobs:
         print("  " + source_job['name'] + " #" + str(source_job['build_number']))

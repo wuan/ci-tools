@@ -73,7 +73,7 @@ class TestSuite(object):
 
     def __repr__(self):
         return "TestSuite(name=" + str(self.name) + ", timestamp=" \
-               + str(datetime.datetime.fromtimestamp(self.timestamp)) + ", total=" + str(self.total) + ", skipped=" \
+               + str(datetime.datetime.fromtimestamp(self.timestamp / 1000)) + ", total=" + str(self.total) + ", skipped=" \
                + str(self.skipped) + ", failures=" + str(self.failures) + ", errors=" + str(self.errors) + ")"
 
 
