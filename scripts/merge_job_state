@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
     for source in sources:
         with Persistence(source + '.db') as persistence:
-            source_report = persistence.get_report()
+            source_report = persistence.report
 
             print("source " + source + " " + str(source_report))
 
@@ -86,8 +86,8 @@ if __name__ == '__main__':
     target_report = TestReport(target, suites_by_module, 0, False)
 
     with Persistence(target + '.db') as persistence:
-        persistence.set_report(target_report)
-        persistence.set_source_jobs(source_jobs)
+        persistence.report = target_report
+        persistence.source_jobs = source_jobs
 
     print("target " + target + " " + str(target_report))
     print("source jobs:")

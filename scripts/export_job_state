@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
         persistence = Persistence(target + '.db')
 
-        report = persistence.get_report()
+        report = persistence.report
 
         if report is not None:
             with open('junit.xml', 'w') as junit_result_file:

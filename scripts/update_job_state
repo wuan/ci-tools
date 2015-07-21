@@ -49,7 +49,7 @@ if __name__ == '__main__':
         if test_report is not None:
             with Persistence(job_name + '.db') as persistence:
 
-                previous_report = persistence.get_report()
+                previous_report = persistence.report
 
                 if test_report.is_incremental and previous_report is not None:
                     print("incremental update of " + str(previous_report))
@@ -57,5 +57,5 @@ if __name__ == '__main__':
                     suites_by_module.update(test_report.suites_by_module)
                     test_report = TestReport(test_report.name, suites_by_module, test_report.build_number, False)
 
-                persistence.set_report(test_report)
+                persistence.report = test_report
                 print(job_name + ": " + str(test_report))
