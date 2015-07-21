@@ -27,6 +27,7 @@ import shelve
 
 from citools.data import TestReport
 from citools.jenkins.report import Report
+from citools.persistence import Persistence
 
 if __name__ == '__main__':
 
@@ -46,21 +47,15 @@ if __name__ == '__main__':
         test_report = report.get_report(job_url)
 
         if test_report is not None:
-            db = shelve.open(job_name + ".db")
+            with Persistence(job_name + '.db') as persistence:
 
-            previous_report = db.get('report', None)
+                previous_report = persistence.get_report()
 
-            if test_report.is_incremental and previous_report is not None:
-                print("incremental update of " + str(previous_report))
+                if test_report.is_incremental and previous_report is not None:
+                    print("incremental update of " + str(previous_report))
+                    suites_by_module = previous_report.suites_by_module
+                    suites_by_module.update(test_report.suites_by_module)
+                    test_report = TestReport(test_report.name, suites_by_module, test_report.build_number, False)
 
-                suites_by_module = previous_report.suites_by_module
-
-                suites_by_module.update(test_report.suites_by_module)
-
-                test_report = TestReport(test_report.name, suites_by_module, test_report.build_number, False)
-
-            db['report'] = test_report
-
-            print(job_name + ": " + str(test_report))
-
-            db.close()
+                persistence.set_report(test_report)
+                print(job_name + ": " + str(test_report))
