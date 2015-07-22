@@ -69,30 +69,29 @@ if __name__ == '__main__':
 
     suites_by_module = {}
 
-    source_jobs = []
+    source_jobs = {}
 
     for source in sources:
         with Persistence(source + '.db') as persistence:
             source_report = persistence.report
 
             print("source " + source + " " + str(source_report))
+            if source_report is not None:
+                for module, suites in source_report.suites_by_module.iteritems():
+                    suites_by_module[module] = merge_suites(suites_by_module[module],
+                                                            suites) if module in suites_by_module else suites
 
-            for module, suites in source_report.suites_by_module.iteritems():
-                suites_by_module[module] = merge_suites(suites_by_module[module],
-                                                        suites) if module in suites_by_module else suites
-
-        source_jobs.append({'name': source, 'build_number': source_report.build_number})
+                source_jobs.update(persistence.job_info)
 
     target_report = TestReport(target, suites_by_module, 0, False)
 
     with Persistence(target + '.db') as persistence:
         persistence.report = target_report
-        persistence.source_jobs = source_jobs
+        persistence.job_info = source_jobs
 
     print("target " + target + " " + str(target_report))
     print("source jobs:")
-    for source_job in source_jobs:
-        job_name = source_job['name']
-        build_number = str(source_job['build_number'])
+    for job_name, build_number in source_jobs.iteritems():
+        build_number = str(build_number)
         print("  " + job_name + " #" + build_number + " "
               + jenkins_url + "job/" + job_name + "/" + build_number)

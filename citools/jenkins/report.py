@@ -50,6 +50,7 @@ class Report(object):
         test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
 
         if test_report_request.status_code != 200:
+            print("could not get report: status code", test_report_request.status_code)
             return None
 
         test_report = json.loads(test_report_request.text)
