@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='citools',
-    version='0.2.27',
+    version='0.2.28',
     packages=find_packages(),
     scripts=glob.glob('scripts/*'),
     description='CI Tools',

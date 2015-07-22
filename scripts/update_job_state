@@ -44,7 +44,6 @@ if __name__ == '__main__':
     for job_name in args:
         job_url = jenkins_url + "job/" + job_name
         test_report = report.get_report(job_url)
-        print("  " + job_name + " report: " + str(test_report))
 
         if test_report is not None:
             with Persistence(job_name + '.db') as persistence:
