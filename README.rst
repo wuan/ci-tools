@@ -3,7 +3,7 @@
 
 .. image:: https://badge.fury.io/py/citools.png
     :alt: PyPi-Package
-    :target: https://badge.fury.io/py/citools.png
+    :target: https://badge.fury.io/py/citools
 .. image:: https://travis-ci.org/wuan/ci-tools.svg?branch=master
     :alt: Build Status
     :target: https://travis-ci.org/wuan/ci-tools
