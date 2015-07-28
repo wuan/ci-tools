@@ -1,8 +1,12 @@
 ci-tools
 ========
 
-.. image:: https://badge.fury.io/py/citools.png :alt: PyPi-Package :target: https://badge.fury.io/py/citools.png
-.. image:: https://travis-ci.org/wuan/ci-tools.svg :alt: Build Status :target: https://travis-ci.org/wuan/ci-tools
+.. image:: https://badge.fury.io/py/citools.png
+    :alt: PyPi-Package
+    :target: https://badge.fury.io/py/citools.png
+.. image:: https://travis-ci.org/wuan/ci-tools.svg?branch=master
+    :alt: Build Status
+    :target: https://travis-ci.org/wuan/ci-tools
 
 prototype tool collection for continuous integration of Java projects with lots of modules
 
@@ -16,7 +20,7 @@ Example::
 
     update_job_state master-unittests master-integrationtests
 
-This will create a local database `master-unittests.db` containing all test results. Newer Suites overwrite older ones. Full tests runs overwrite all results.
+This will create local databases ``master-unittests.db`` and ``master-integrationtests.db``  containing all test results of the given job name ``master-unittests`` and ``master-integrationtests``. Newer Suites overwrite older ones. Full tests runs overwrite all results.
 
 merge test results of job database
 ----------------------------------
@@ -28,5 +32,8 @@ Example::
 create junit result from database
 ---------------------------------
 
+::
+
     export_job_state master
 
+Creates a JUnit XML file containing the current test state from the ``master.db`` persistence file.
