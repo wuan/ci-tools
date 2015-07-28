@@ -1,5 +1,5 @@
-ci-tools
-========
+'ci-tools <https://github.com/wuan/ci-tools>'_
+==============================================
 
 .. image:: https://badge.fury.io/py/citools.png
     :alt: PyPi-Package
@@ -20,7 +20,7 @@ Example::
 
     update_job_state master-unittests master-integrationtests
 
-This will create local databases ``master-unittests.db`` and ``master-integrationtests.db``  containing all test results of the given job name ``master-unittests`` and ``master-integrationtests``. Newer Suites overwrite older ones. Full tests runs overwrite all results.
+This will create local databases ``master-unittests.db`` and ``master-integrationtests.db``  containing all test results of the given job names ``master-unittests`` and ``master-integrationtests``. Newer Suites overwrite older ones. Full tests runs overwrite all results.
 
 merge test results of job database
 ----------------------------------
