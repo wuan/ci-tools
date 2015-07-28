@@ -1,4 +1,4 @@
-'ci-tools <https://github.com/wuan/ci-tools>'_
+`ci-tools <https://github.com/wuan/ci-tools>`_
 ==============================================
 
 .. image:: https://badge.fury.io/py/citools.png
