@@ -59,11 +59,15 @@ class Report(object):
 
         for child_report in test_report['childReports']:
             child_result = child_report['result']
-            module_url = child_report['child']['url']
-            module = module_url[len(job_url):].split('/')[1].replace('$', ':')
 
-            suites = [self.create_suite(suite, timestamp, module) for suite in child_result['suites']]
-            suites_by_module[module] = suites
+            if 'url' in child_report['child']:
+                module_url = child_report['child']['url']
+                module = module_url[len(job_url):].split('/')[1].replace('$', ':')
+
+                suites = [self.create_suite(suite, timestamp, module) for suite in child_result['suites']]
+                suites_by_module[module] = suites
+
+            print("ERROR: unknown module in ", child_report)
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"
