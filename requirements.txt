@@ -1,5 +1,5 @@
 requests
+junit-xml
 assertpy==0.8
-coverage==3.7.1
-mock==1.1.3
-nose==1.3.7
+pytest-cov
+mock

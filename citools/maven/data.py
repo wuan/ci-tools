@@ -25,18 +25,6 @@ class Artifact(object):
         self.package_type = package_type
         self.version = version
 
-    def get_group_id(self):
-        return self.group_id
-
-    def get_artifact_id(self):
-        return self.artifact_id
-
-    def get_package_type(self):
-        return self.package_type
-
-    def get_version(self):
-        return self.version
-
     def __repr__(self):
         return "Artifact[{}:{}:{}:{}]".format(self.group_id, self.artifact_id, self.package_type, self.version)
 
@@ -45,9 +33,6 @@ class Dependency(Artifact):
     def __init__(self, group_id, artifact_id, package_type, version, scope):
         super(Dependency, self).__init__(group_id, artifact_id, package_type, version)
         self.scope = scope
-
-    def get_scope(self):
-        return self.scope
 
     def __repr__(self):
         return "Dependency[{}:{}:{}:{}, scope={}]".format(self.group_id, self.artifact_id, self.package_type,

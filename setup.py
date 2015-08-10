@@ -33,5 +33,5 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     install_requires=['requests', 'junit-xml'],
-    tests_require=['nose', 'mock', 'coverage', 'assertpy'],
+    tests_require=['pytest-cov', 'mock', 'assertpy'],
 )
