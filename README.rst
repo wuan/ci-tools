@@ -7,6 +7,8 @@
 .. image:: https://travis-ci.org/wuan/ci-tools.svg?branch=master
     :alt: Build Status
     :target: https://travis-ci.org/wuan/ci-tools
+.. image:: https://coveralls.io/repos/wuan/ci-tools/badge.svg?branch=master&service=github
+    :target: https://coveralls.io/github/wuan/ci-tools?branch=master 
 
 prototype tool collection for continuous integration of Java projects with lots of modules
 
