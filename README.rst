@@ -1,6 +1,12 @@
 `ci-tools <https://github.com/wuan/ci-tools>`_
 ==============================================
 
+.. image:: https://pypip.in/v/citools/badge.png
+   :target: https://crate.io/packages/citools/
+   :alt: Latest PyPI version
+.. image:: https://pypip.in/d/citools/badge.png
+   :target: https://crate.io/packages/citools/
+   :alt: Number of PyPI downloads
 .. image:: https://badge.fury.io/py/citools.png
     :alt: PyPi-Package
     :target: https://badge.fury.io/py/citools
