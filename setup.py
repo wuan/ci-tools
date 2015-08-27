@@ -11,6 +11,7 @@ setup(
     description='CI Tools',
     author='Andreas Würl',
     author_email='andreas@wuerl.net',
+    url='https://github.com/wuan/ci-tools',
     license='Apache-2.0',
     classifiers=[
         'Development Status :: 3 - Alpha',
