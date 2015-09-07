@@ -31,10 +31,12 @@ Example::
 
     merge_job_state master-unittests master-integrationtests master
 
+Creates a local database ``master.db`` containing the merged test results of the local databases ``master-unittests.db`` and ``master-integrationtests.db``.
+
 create junit result from database
 ---------------------------------
 
-::
+Example::
 
     export_job_state master
 
