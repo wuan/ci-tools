@@ -66,8 +66,8 @@ class Report(object):
 
                 suites = [self.create_suite(suite, timestamp, module) for suite in child_result['suites']]
                 suites_by_module[module] = suites
-
-            print("ERROR: unknown module in ", child_report)
+            else:
+                print("ERROR: unknown module in ", child_report)
 
         is_incremental = bool([cause for cause in self.get_causes(build_info['actions'])
                                if cause['shortDescription'] == "Started by an SCM change"
