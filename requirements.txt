@@ -3,3 +3,4 @@ junit-xml
 assertpy==0.8
 pytest-cov
 mock
+lazy
