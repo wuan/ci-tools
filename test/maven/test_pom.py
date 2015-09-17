@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 
 """
@@ -19,26 +18,24 @@
 
 """
 
-from optparse import OptionParser
-from junit_xml import TestSuite
-from citools.persistence import Persistence
+from __future__ import print_function
+import os
 
-if __name__ == '__main__':
+import unittest
+from assertpy import assert_that
+import pytest
+import citools
 
-    parser = OptionParser()
-
-    (options, args) = parser.parse_args()
-
-    if len(args) == 1:
-        target = args[0]
-
-        persistence = Persistence(target + '.db')
-
-        report = persistence.report
-
-        if report is not None:
-            with open('junit.xml', 'w') as junit_result_file:
-                TestSuite.to_file(junit_result_file, report.test_suites, False, "latin1")
+from citools.maven.dependencies import DependencyList
 
 
+class TestPom:
+
+    @pytest.fixture
+    def pom(self):
+        return citools.maven.Pom(os.path.join(os.path.dirname(__file__), 'pom.xml'))
+
+    def test_modules(self, pom):
+        modules = pom.modules
+        assert_that(modules).contains("module1", "module2", "module3")
 

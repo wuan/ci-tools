@@ -20,11 +20,16 @@
 """
 
 from optparse import OptionParser
-from junit_xml import TestSuite
-from citools.persistence import Persistence
+import os
+import sys
+from citools.maven import Pom
 
 if __name__ == '__main__':
 
+    pom = Pom(os.path.join(os.getcwd(), "pom.xml"))
+    modules = set(pom.modules)
+
+    
     parser = OptionParser()
 
     (options, args) = parser.parse_args()

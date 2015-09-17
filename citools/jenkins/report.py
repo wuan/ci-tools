@@ -17,9 +17,7 @@
 
 """
 
-import json
 from junit_xml import TestCase, TestSuite
-import requests
 from ..data import TestReport
 
 
@@ -27,10 +25,11 @@ class Report(object):
     CASE_MAP = {'skipped': None, 'failedSince': None, 'className': 'classname', 'age': None}
     SUITE_MAP = {'timestamp': None, 'cases': 'testcases', 'id': None}
 
-    API_JSON = "/api/json"
+    def __init__(self, jenkins):
+        self.jenkins = jenkins
 
-    def get_report(self, job_url, build_number=None):
-        project_info = json.loads(requests.get(job_url + self.API_JSON).text)
+    def get_report(self, job_name, build_number=None):
+        project_info = self.jenkins.job(job_name)
 
         if build_number is None:
             build_number = project_info['lastCompletedBuild']['number']
@@ -43,20 +42,15 @@ class Report(object):
         if build_url is None:
             raise ValueError("no build with number {} found".format(build_number))
 
-        build_info = json.loads(requests.get(build_url + self.API_JSON).text)
+        build_info = self.jenkins.get_api(build_url)
 
         timestamp = build_info['timestamp']
 
-        test_report_request = requests.get(build_url + '/testReport' + self.API_JSON)
-
-        if test_report_request.status_code != 200:
-            print("could not get report: status code", test_report_request.status_code)
-            return None
-
-        test_report = json.loads(test_report_request.text)
+        test_report = self.jenkins.get_api(build_url + '/testReport')
 
         suites_by_module = {}
 
+        job_url = self.jenkins.job_url(job_name)
         for child_report in test_report['childReports']:
             child_result = child_report['result']
 

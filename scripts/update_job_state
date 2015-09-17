@@ -27,6 +27,7 @@ import os
 from citools.data import TestReport
 from citools.jenkins.report import Report
 from citools.persistence import Persistence
+from citools.jenkins import Jenkins
 
 if __name__ == '__main__':
 
@@ -34,16 +35,11 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_args()
 
-    report = Report()
-
-    jenkins_url = os.environ['JENKINS_URL']
-
-    if jenkins_url is None:
-        raise RuntimeError("Jenkins Url should be set.")
+    jenkins = Jenkins()
+    report = Report(jenkins)
 
     for job_name in args:
-        job_url = jenkins_url + "job/" + job_name
-        test_report = report.get_report(job_url)
+        test_report = report.get_report(job_name)
 
         if test_report is not None:
             with Persistence(job_name + '.db') as persistence:

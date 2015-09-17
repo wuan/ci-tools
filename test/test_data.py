@@ -1,4 +1,3 @@
-import unittest
 from assertpy import assert_that
 import datetime
 from junit_xml import TestSuite, TestCase

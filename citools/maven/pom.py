@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 
 """
@@ -19,26 +18,22 @@
 
 """
 
-from optparse import OptionParser
-from junit_xml import TestSuite
-from citools.persistence import Persistence
+from xml.etree import ElementTree
 
-if __name__ == '__main__':
-
-    parser = OptionParser()
-
-    (options, args) = parser.parse_args()
-
-    if len(args) == 1:
-        target = args[0]
-
-        persistence = Persistence(target + '.db')
-
-        report = persistence.report
-
-        if report is not None:
-            with open('junit.xml', 'w') as junit_result_file:
-                TestSuite.to_file(junit_result_file, report.test_suites, False, "latin1")
+from lazy import lazy
 
 
+class Pom(object):
+    NAMESPACE = 'http://maven.apache.org/POM/4.0.0'
 
+    def __init__(self, pom_file_name):
+        self.pom_file_name = pom_file_name
+
+    @lazy
+    def pom_tree(self):
+        return ElementTree.parse(self.pom_file_name)
+
+    @property
+    def modules(self):
+        return [element.text for element in
+                self.pom_tree.find('./mvn-pom:modules', {'mvn-pom': self.NAMESPACE})]
