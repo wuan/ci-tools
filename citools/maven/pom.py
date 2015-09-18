@@ -36,4 +36,4 @@ class Pom(object):
     @property
     def modules(self):
         return [element.text for element in
-                self.pom_tree.find('./{{{0}}}mvn-pom:modules'.format(self.NAMESPACE))]
+                self.pom_tree.find('./{{{0}}}modules'.format(self.NAMESPACE))]
