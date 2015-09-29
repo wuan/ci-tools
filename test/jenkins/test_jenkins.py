@@ -18,7 +18,7 @@ RESPONSE = {
                                                  u'name': u'origin/master'}]},
              u'remoteUrls': [u'ssh://repo.org/group/repo.git'],
              u'scmName': u''},
-             {},
+         },
          {},
          {u'failCount': 0,
           u'skipCount': 2,
