@@ -1,6 +1,9 @@
 `ci-tools <https://github.com/wuan/ci-tools>`_
 ==============================================
 
+.. image:: https://badge.fury.io/gh/wuan%2Fci-tools.svg
+    :alt: project on GitHub
+    :target: http://badge.fury.io/gh/wuan%2Fci-tools
 .. image:: https://badge.fury.io/py/citools.svg
     :alt: PyPi-Package
     :target: https://badge.fury.io/py/citools
