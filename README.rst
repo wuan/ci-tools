@@ -1,7 +1,7 @@
 `ci-tools <https://github.com/wuan/ci-tools>`_
 ==============================================
 
-.. image:: https://badge.fury.io/py/citools.png
+.. image:: https://badge.fury.io/py/citools.svg
     :alt: PyPi-Package
     :target: https://badge.fury.io/py/citools
 .. image:: https://travis-ci.org/wuan/ci-tools.svg?branch=master
