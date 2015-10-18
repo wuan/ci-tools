@@ -51,11 +51,11 @@ class Report(object):
         suites_by_module = {}
 
         job_url = self.jenkins.job_url(job_name)
-        if test_report != None and 'childReports' in test_report:
+        if test_report is not None and 'childReports' in test_report:
             for child_report in test_report['childReports']:
                 child_result = child_report['result']
 
-                if 'url' in child_report['child']:
+                if 'child' in child_report and 'url' in child_report['child']:
                     module_url = child_report['child']['url']
                     module = module_url[len(job_url):].split('/')[1].replace('$', ':')
 
