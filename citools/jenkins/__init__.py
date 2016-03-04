@@ -18,6 +18,7 @@
    limitations under the License.
 
 """
+from __future__ import print_function
 import json
 
 import os
@@ -45,10 +46,11 @@ class Jenkins(object):
         return url
 
     def get_api(self, url):
+        print("get_api({0})".format(url + self.API_JSON))
         response = requests.get(url + self.API_JSON)
 
         if response.status_code != 200:
-            print("could not get {0}: status code {1}".format(url, response.status_code))
+            print("  could not get {0}: status code {1}".format(url, response.status_code))
             return None
 
         return json.loads(response.text)
